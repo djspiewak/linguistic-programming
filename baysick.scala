@@ -143,9 +143,9 @@ object Baysick {
   }
   
   
-  def baysick(body: Context => (Unit @cps[Fragment])) {
+  def baysick(body: =>(Unit @cps[Fragment])) {
     val result = reset {
-      body(new Context)
+      body
       Halt: Fragment
     }
     
