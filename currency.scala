@@ -1,17 +1,17 @@
 import java.math.MathContext
 
-object MonitaryUtils {
+object MonetaryUtils {
   trait Currency {
     def rateToUSD: BigDecimal
   }
   
-  final class USD private[MonitaryUtils] () extends Currency {
+  final class USD private[MonetaryUtils] () extends Currency {
     val rateToUSD = BigDecimal(1, MathContext.DECIMAL128)
   }
 
   val usd = new USD
   
-  final class Euro private[MonitaryUtils] () extends Currency {
+  final class Euro private[MonetaryUtils] () extends Currency {
     val rateToUSD = BigDecimal(1.3895, MathContext.DECIMAL128)
   }
   
@@ -28,13 +28,13 @@ object MonitaryUtils {
   
   
   implicit def doubleToCurrencySyntax(d: Double) = new {
-    def usd = Money(BigDecimal(d, MathContext.DECIMAL128), MonitaryUtils.usd)
-    def euro = Money(BigDecimal(d, MathContext.DECIMAL128), MonitaryUtils.euro)
+    def usd = Money(BigDecimal(d, MathContext.DECIMAL128), MonetaryUtils.usd)
+    def euro = Money(BigDecimal(d, MathContext.DECIMAL128), MonetaryUtils.euro)
   }
 }
 
 
-import MonitaryUtils._
+import MonetaryUtils._
 
 def makePurchaseInEurope(from: Money[Euro]) = from
 
